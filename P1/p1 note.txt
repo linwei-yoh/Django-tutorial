@@ -1,0 +1,63 @@
+# Django-tutorial
+
+在安装完成Django 和python后。开始Django的学习。
+
+1.Creating a project
+在CMD 中CD到需要的目录下执行
+django-admin startproject pro-name    (pro-name 项目名称 遵从命名规范
+
+遇到的问题：
+Q：执行后没任何报错，但是没有任何工程文件生成。
+A：在python script文件牡目录下的django文件默认打开方式从pycharm改回python 解决问题。
+
+2.The development server
+在当前项目的路径下 执行 python manage.py runserver 开启服务器
+Now’s a good time to note: 
+don’t use this server in anything resembling a production environment. 
+It’s intended only for use while developing. 
+(We’re in the business of making Web frameworks, not Web servers.)
+
+此项指令默认开启的端口为8000 通过http://localhost:8000/进入页面
+也可以通过以下方式手动设定端口与IP，
+python manage.py runserver 8080
+python manage.py runserver 0.0.0.0:8000
+
+3.creating a app
+app是project的组成部分，负责具体功能的实现。
+在任意指定的作为APP程序的路径下。
+执行python manage.py startapp app-name   (app-name app名称 遵从命名规范
+
+
+4.Write your first view
+1)建立View
+将app路径下views.py 修改内容。简易例子：
+from django.http import HttpResponse
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+为了调用这个view，我们需要映射他到一个URL，和一个URLconf。	
+
+2)创建一个URLconf
+在app根目录下创建一个urls.py
+from django.conf.urls import url
+from . import views    #刚建立的views
+urlpatterns = [
+    url(r'^$', views.index, name='index'),  #正则表达式，函数名，设置name
+]
+
+在project目录下的urls.py中
+from django.conf.urls import include, url
+from django.contrib import admin
+urlpatterns = [
+    url(r'^polls/', include('polls.urls')), #添加app的URLconfs到urlpatterns  polls是app名称
+    url(r'^admin/', admin.site.urls),
+]
+
+注意：
+include方法没有使用$ 而是/，因为并不是结束。
+include会去掉被匹配的部分，把剩下的字符串传递给指定的URLconf。
+
+You should always use include() when you include other URL patterns. 
+admin.site.urls is the only exception to this.
+
+3)运行
+完成前两部已经将index view连接到此URLconf，运行服务器，在对应页面即可看到结果
