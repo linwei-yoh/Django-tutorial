@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}默认标题{% endblock %}</title>
+</head>
+<body>
+    <h1>这里是首页</h1>
+
+    {% block content %}默认内容{% endblock %}
+
+    {% block footer %}
+    <hr>
+    <p>Thanks for visiting my site.</p>
+    {% endblock %}
+</body>
+</html>
