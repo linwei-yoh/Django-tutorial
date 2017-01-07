@@ -1,0 +1,33 @@
+{% extends "learn\base.html" %}
+
+{% block title %}子页面标题{% endblock %}
+
+{% block content %}
+<p>子页面内容.</p>
+
+<p>{{strkey}}</p>
+
+<p>
+教程列表：
+{% for i in listkey %}
+{{ i }}
+{% endfor %}
+</p>
+
+<p>站点:{{infokey.site}}  内容:{{infokey.content}}</p>
+
+<p>
+{% for key, value in infokey.items %}
+    {{ key }}: {{ value }}
+{% endfor %}
+</p>
+
+<p> 
+{% for item in List %}
+    {{ item }}{% if not forloop.last %},{% endif %} 
+{% endfor %}
+</p>
+{% endblock %}
+
+
+
